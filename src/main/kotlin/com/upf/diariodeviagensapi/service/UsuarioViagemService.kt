@@ -41,9 +41,34 @@ class UsuarioViagemService(
 
     fun insertViagem(request: UsuarioViagemWrapperRequest): ApiResponse<UsuarioViagemWrapperResponse> {
         // consulta na base para ver se a viagem já existe baseado no viagem id
-        val viagemOpt = usuarioViagemRepository.findByViagensId(request.viagem?.id)
-        // se não existir, insere a nova viagem
-        return if (viagemOpt.isEmpty) {
+        val viagemOpt = usuarioViagemRepository.findUsuarioViagemById(request.id)
+        return if (viagemOpt.isPresent) {
+            val existe = viagemOpt.get().viagens?.find { it.id == request.viagem?.id }
+            if (existe == null) {
+                viagemOpt.get().viagens!!.add(
+                    UsuarioViagem.Viagem(
+                        titulo = request.viagem?.titulo,
+                        descricao = request.viagem?.descricao,
+                        localizacao = usuarioViagemRequestToModelMapper.mapLocalizacaoRequestToModel(request.viagem?.localizacao),
+                        imagemCapa = request.viagem?.imagemCapa,
+                        imagens = request.viagem?.imagens
+                    )
+                )
+            } else {
+                // se já existir, realiza o update nos campos alterados
+                existe.titulo = request.viagem?.titulo
+                existe.descricao = request.viagem?.descricao
+                existe.imagemCapa = request.viagem?.imagemCapa
+                existe.imagens = request.viagem?.imagens
+            }
+            ApiResponse(
+                usuarioViagemModelToResponse.map(
+                    usuarioViagemRepository.save(
+                        viagemOpt.get().copy(viagens = viagemOpt.get().viagens)
+                    )
+                )
+            )
+        } else {
             ApiResponse(
                 usuarioViagemModelToResponse.map(
                     usuarioViagemRepository.save(
@@ -53,17 +78,6 @@ class UsuarioViagemService(
                     )
                 )
             )
-        } else {
-            // se já existir, realiza o update nos campos alterados
-            viagemOpt.get().viagens?.forEach {
-                if(it.id == request.id) {
-                    it.titulo = request.viagem?.titulo
-                    it.descricao = request.viagem?.descricao
-                    it.imagemCapa = request.viagem?.imagemCapa
-                    it.imagens = request.viagem?.imagens
-                }
-            }
-            ApiResponse(usuarioViagemModelToResponse.map(usuarioViagemRepository.save(viagemOpt.get())))
         }
     }
 }

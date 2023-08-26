@@ -9,7 +9,7 @@ class UsuarioViagemRequestToModelMapper : Mapper<UsuarioViagemWrapperRequest, Us
 
     override fun map(t: UsuarioViagemWrapperRequest): UsuarioViagem {
         return UsuarioViagem(
-            id = t.id!!,
+            id = t.id,
             usuario = t.usuario,
             viagens = mapViagensRequestToModel(t.viagem)
         )

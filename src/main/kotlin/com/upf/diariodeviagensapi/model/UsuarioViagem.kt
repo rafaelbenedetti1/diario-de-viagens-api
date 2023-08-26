@@ -10,7 +10,7 @@ import kotlin.collections.ArrayList
 data class UsuarioViagem(
     @Id
     @Field("_id")
-    val id: String = UUID.randomUUID().toString(),
+    val id: String? = UUID.randomUUID().toString(),
     var usuario: String,
     @Field
     var viagens: ArrayList<Viagem>?
