@@ -7,7 +7,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Document("usuarioviagem")
-data class UsuarioViagem(
+data class Viagem(
     @Id
     @Field("_id")
     val id: String = UUID.randomUUID().toString(),

@@ -1,6 +1,6 @@
 package com.upf.diariodeviagensapi.wrappers.request
 
-data class UsuarioViagemWrapperRequest(
+data class ViagemWrapperRequest(
 
     val id: String? = null,
     val usuario: String,

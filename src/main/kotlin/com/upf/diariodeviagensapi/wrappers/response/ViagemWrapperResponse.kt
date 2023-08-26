@@ -1,8 +1,6 @@
 package com.upf.diariodeviagensapi.wrappers.response
 
-import org.springframework.data.mongodb.core.mapping.Field
-
-data class UsuarioViagemWrapperResponse(
+data class ViagemWrapperResponse(
     val id: String? = null,
 
     val usuario: String,

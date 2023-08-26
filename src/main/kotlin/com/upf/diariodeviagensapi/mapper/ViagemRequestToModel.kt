@@ -1,24 +1,24 @@
 package com.upf.diariodeviagensapi.mapper
 
-import com.upf.diariodeviagensapi.model.UsuarioViagem
-import com.upf.diariodeviagensapi.wrappers.request.UsuarioViagemWrapperRequest
+import com.upf.diariodeviagensapi.model.Viagem
+import com.upf.diariodeviagensapi.wrappers.request.ViagemWrapperRequest
 import org.springframework.stereotype.Component
 
 @Component
-class UsuarioViagemRequestToModelMapper : Mapper<UsuarioViagemWrapperRequest, UsuarioViagem> {
+class ViagemRequestToModel : Mapper<ViagemWrapperRequest, Viagem> {
 
-    override fun map(t: UsuarioViagemWrapperRequest): UsuarioViagem {
-        return UsuarioViagem(
+    override fun map(t: ViagemWrapperRequest): Viagem {
+        return Viagem(
             usuario = t.usuario,
             viagens = mapViagensRequestToModel(t.viagem)
         )
     }
 
-    fun mapViagensRequestToModel(viagemWrapperRequest: UsuarioViagemWrapperRequest.ViagemWrapperRequest?): ArrayList<UsuarioViagem.Viagem> {
-        val lista: ArrayList<UsuarioViagem.Viagem> = arrayListOf()
+    fun mapViagensRequestToModel(viagemWrapperRequest: ViagemWrapperRequest.ViagemWrapperRequest?): ArrayList<Viagem.Viagem> {
+        val lista: ArrayList<Viagem.Viagem> = arrayListOf()
         if (viagemWrapperRequest != null) {
             lista.add(
-                UsuarioViagem.Viagem(
+                Viagem.Viagem(
                     titulo = viagemWrapperRequest.titulo,
                     descricao = viagemWrapperRequest.descricao,
                     localizacao = mapLocalizacaoRequestToModel(viagemWrapperRequest.localizacao),
@@ -32,8 +32,8 @@ class UsuarioViagemRequestToModelMapper : Mapper<UsuarioViagemWrapperRequest, Us
         return lista
     }
 
-    fun mapLocalizacaoRequestToModel(localizacaoRequest: UsuarioViagemWrapperRequest.ViagemWrapperRequest.LocalizacaoWrapperRequest?): UsuarioViagem.Viagem.Localizacao {
-        return UsuarioViagem.Viagem.Localizacao(
+    fun mapLocalizacaoRequestToModel(localizacaoRequest: ViagemWrapperRequest.ViagemWrapperRequest.LocalizacaoWrapperRequest?): Viagem.Viagem.Localizacao {
+        return Viagem.Viagem.Localizacao(
             cidade = localizacaoRequest?.cidade,
             estado = localizacaoRequest?.estado,
             pais = localizacaoRequest?.pais
