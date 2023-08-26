@@ -58,6 +58,7 @@ class UsuarioViagemService(
                 // se já existir, realiza o update nos campos alterados
                 existe.titulo = request.viagem?.titulo
                 existe.descricao = request.viagem?.descricao
+                existe.localizacao = usuarioViagemRequestToModelMapper.mapLocalizacaoRequestToModel(request.viagem?.localizacao)
                 existe.imagemCapa = request.viagem?.imagemCapa
                 existe.imagens = request.viagem?.imagens
             }
