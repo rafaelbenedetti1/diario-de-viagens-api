@@ -33,7 +33,10 @@ class ViagemService(
                         descricao = request.viagem?.descricao,
                         localizacao = viagemRequestToModel.mapLocalizacaoRequestToModel(request.viagem?.localizacao),
                         imagemCapa = request.viagem?.imagemCapa,
-                        imagens = request.viagem?.imagens
+                        imagens = viagemRequestToModel.mapImagemRequestToModel(request.viagem?.imagens),
+                        dataInicio = request.viagem?.dataInicio,
+                        dataFim = request.viagem?.dataFim,
+                        visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas)
                     )
                 )
             } else {
@@ -42,7 +45,10 @@ class ViagemService(
                 viagemExistente.descricao = request.viagem?.descricao
                 viagemExistente.localizacao = viagemRequestToModel.mapLocalizacaoRequestToModel(request.viagem?.localizacao)
                 viagemExistente.imagemCapa = request.viagem?.imagemCapa
-                viagemExistente.imagens = request.viagem?.imagens
+                viagemExistente.imagens = viagemRequestToModel.mapImagemRequestToModel(request.viagem?.imagens)
+                viagemExistente.dataInicio = request.viagem?.dataInicio
+                viagemExistente.dataFim = request.viagem?.dataFim
+                viagemExistente.visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas)
             }
             ApiResponse(
                 viagemModelToResponse.map(

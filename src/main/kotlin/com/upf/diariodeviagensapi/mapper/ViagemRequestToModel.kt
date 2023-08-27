@@ -23,7 +23,10 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, Viagem> {
                     descricao = viagemWrapperRequest.descricao,
                     localizacao = mapLocalizacaoRequestToModel(viagemWrapperRequest.localizacao),
                     imagemCapa = viagemWrapperRequest.imagemCapa,
-                    imagens = viagemWrapperRequest.imagens
+                    imagens = mapImagemRequestToModel(viagemWrapperRequest.imagens),
+                    dataInicio = viagemWrapperRequest.dataInicio,
+                    dataFim = viagemWrapperRequest.dataFim,
+                    visitas = mapVisitasRequestToModel(viagemWrapperRequest.visitas)
                 )
             )
         }
@@ -36,7 +39,38 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, Viagem> {
         return Viagem.Viagem.Localizacao(
             cidade = localizacaoRequest?.cidade,
             estado = localizacaoRequest?.estado,
-            pais = localizacaoRequest?.pais
+            pais = localizacaoRequest?.pais,
+            bairro = localizacaoRequest?.bairro,
+            rua = localizacaoRequest?.rua
         )
+    }
+
+    fun mapImagemRequestToModel(imagensRequest: List<ViagemWrapperRequest.ViagemWrapperRequest.ImagemWrapperRequest>?): ArrayList<Viagem.Viagem.Imagem> {
+        val listaImagens: ArrayList<Viagem.Viagem.Imagem> = arrayListOf()
+        imagensRequest?.forEach {
+            listaImagens.add(
+                Viagem.Viagem.Imagem(
+                    arquivo = it.arquivo,
+                    localizacao = mapLocalizacaoRequestToModel(it.localizacao),
+                    data = it.data
+                )
+            )
+        }
+        return listaImagens
+    }
+
+    fun mapVisitasRequestToModel(visitasRequest: List<ViagemWrapperRequest.ViagemWrapperRequest.VisitaWrapperRequest>?): ArrayList<Viagem.Viagem.Visita> {
+        val listaVisitas: ArrayList<Viagem.Viagem.Visita> = arrayListOf()
+        visitasRequest?.forEach {
+            listaVisitas.add(
+                Viagem.Viagem.Visita(
+                    nomeLocal = it.nomeLocal,
+                    localizacao = mapLocalizacaoRequestToModel(it.localizacao),
+                    data = it.data,
+                    imagens = it.imagens
+                )
+            )
+        }
+        return listaVisitas
     }
 }

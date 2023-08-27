@@ -22,7 +22,10 @@ class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
                     descricao = it.descricao,
                     localizacao = mapLocalizacaoToResponse(it.localizacao),
                     imagemCapa = it.imagemCapa,
-                    imagens = it.imagens
+                    imagens = mapImagemToResponse(it.imagens),
+                    dataInicio = it.dataInicio,
+                    dataFim = it.dataFim,
+                    visitas = mapVisitasToResponse(it.visitas)
                 ))
             }
         return lista
@@ -32,7 +35,38 @@ class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
         return ViagemWrapperResponse.ViagemWrapperResponse.LocalizacaoWrapperResponse(
             cidade = localizacao?.cidade,
             estado = localizacao?.estado,
-            pais = localizacao?.pais
+            pais = localizacao?.pais,
+            bairro = localizacao?.bairro,
+            rua = localizacao?.rua
         )
+    }
+
+    fun mapImagemToResponse(imagens: List<Viagem.Viagem.Imagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> {
+        val listaImagens: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> = arrayListOf()
+        imagens?.forEach {
+            listaImagens.add(
+                ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse(
+                    arquivo = it.arquivo,
+                    localizacao = mapLocalizacaoToResponse(it.localizacao),
+                    data = it.data
+                )
+            )
+        }
+        return listaImagens
+    }
+
+    fun mapVisitasToResponse(visitas: List<Viagem.Viagem.Visita>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse> {
+        val listaVisitas: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse> = arrayListOf()
+        visitas?.forEach {
+            listaVisitas.add(
+                ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse(
+                    nomeLocal = it.nomeLocal,
+                    localizacao = mapLocalizacaoToResponse(it.localizacao),
+                    data = it.data,
+                    imagens = it.imagens
+                )
+            )
+        }
+        return listaVisitas
     }
 }
