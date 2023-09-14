@@ -2,7 +2,7 @@ package com.upf.diariodeviagensapi.service
 
 import com.upf.diariodeviagensapi.mapper.ViagemModelToResponse
 import com.upf.diariodeviagensapi.mapper.ViagemRequestToModel
-import com.upf.diariodeviagensapi.model.Viagem
+import com.upf.diariodeviagensapi.model.UsuarioViagem
 import com.upf.diariodeviagensapi.repository.ViagemRepository
 import com.upf.diariodeviagensapi.wrappers.request.ViagemWrapperRequest
 import com.upf.diariodeviagensapi.wrappers.response.ApiResponse
@@ -25,10 +25,10 @@ class ViagemService(
         // consulta na base para ver se a viagem já existe baseado no viagem id
         val viagemOpt = viagemRepository.findUsuarioViagemById(request.id)
         return if (viagemOpt.isPresent) {
-            val viagemExistente = viagemOpt.get().viagens?.find { it.id == request.viagem?.id }
+            val viagemExistente = viagemOpt.get().viagens.find { it.id == request.viagem?.id }
             if (viagemExistente == null) {
-                viagemOpt.get().viagens!!.add(
-                    Viagem.Viagem(
+                viagemOpt.get().viagens.add(
+                    UsuarioViagem.Viagem(
                         titulo = request.viagem?.titulo,
                         descricao = request.viagem?.descricao,
                         localizacao = viagemRequestToModel.mapLocalizacaoRequestToModel(request.viagem?.localizacao),

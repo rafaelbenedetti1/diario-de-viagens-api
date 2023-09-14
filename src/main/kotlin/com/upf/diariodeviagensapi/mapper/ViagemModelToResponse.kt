@@ -1,12 +1,12 @@
 package com.upf.diariodeviagensapi.mapper
 
-import com.upf.diariodeviagensapi.model.Viagem
+import com.upf.diariodeviagensapi.model.UsuarioViagem
 import com.upf.diariodeviagensapi.wrappers.response.ViagemWrapperResponse
 import org.springframework.stereotype.Component
 
 @Component
-class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
-    override fun map(t: Viagem): ViagemWrapperResponse {
+class ViagemModelToResponse: Mapper<UsuarioViagem, ViagemWrapperResponse> {
+    override fun map(t: UsuarioViagem): ViagemWrapperResponse {
         return ViagemWrapperResponse(
             id = t.id,
             usuario = t.usuario,
@@ -14,7 +14,7 @@ class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
         )
     }
 
-    fun mapViagensToResponse(viagens: ArrayList<Viagem.Viagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse> {
+    fun mapViagensToResponse(viagens: ArrayList<UsuarioViagem.Viagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse> {
         val lista: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse> = arrayListOf()
         viagens?.forEach {
                 lista.add(ViagemWrapperResponse.ViagemWrapperResponse(
@@ -31,7 +31,7 @@ class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
         return lista
     }
 
-    fun mapLocalizacaoToResponse(localizacao: Viagem.Viagem.Localizacao?): ViagemWrapperResponse.ViagemWrapperResponse.LocalizacaoWrapperResponse {
+    fun mapLocalizacaoToResponse(localizacao: UsuarioViagem.Viagem.Localizacao?): ViagemWrapperResponse.ViagemWrapperResponse.LocalizacaoWrapperResponse {
         return ViagemWrapperResponse.ViagemWrapperResponse.LocalizacaoWrapperResponse(
             cidade = localizacao?.cidade,
             estado = localizacao?.estado,
@@ -41,7 +41,7 @@ class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
         )
     }
 
-    fun mapImagemToResponse(imagens: List<Viagem.Viagem.Imagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> {
+    fun mapImagemToResponse(imagens: List<UsuarioViagem.Viagem.Imagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> {
         val listaImagens: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> = arrayListOf()
         imagens?.forEach {
             listaImagens.add(
@@ -55,7 +55,7 @@ class ViagemModelToResponse: Mapper<Viagem, ViagemWrapperResponse> {
         return listaImagens
     }
 
-    fun mapVisitasToResponse(visitas: List<Viagem.Viagem.Visita>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse> {
+    fun mapVisitasToResponse(visitas: List<UsuarioViagem.Viagem.Visita>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse> {
         val listaVisitas: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse> = arrayListOf()
         visitas?.forEach {
             listaVisitas.add(

@@ -8,13 +8,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @Document("usuarioviagem")
-data class Viagem(
+data class UsuarioViagem(
     @Id
     @Field("_id")
     val id: String = UUID.randomUUID().toString(),
     var usuario: String,
     @Field
-    var viagens: ArrayList<Viagem>?
+    var viagens: ArrayList<Viagem>
 ) {
     data class Viagem(
         @Id
