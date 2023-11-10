@@ -21,10 +21,6 @@ data class UsuarioViagem(
         @Field("_id")
         val id: String = UUID.randomUUID().toString(),
         @Field
-        var titulo: String? = null,
-        @Field
-        var descricao: String? = null,
-        @Field
         var dataInicio: LocalDate? = null,
         @Field
         var dataFim: LocalDate? = null,
@@ -33,7 +29,7 @@ data class UsuarioViagem(
         @Field
         var imagemCapa: String? = null,
         @Field
-        var imagens: ArrayList<Imagem>? = null,
+        var imagens: ArrayList<String>? = null,
         @Field
         var visitas: ArrayList<Visita>? = null,
     ) {
@@ -48,14 +44,6 @@ data class UsuarioViagem(
             val bairro: String? = null,
             @Field
             val rua: String? = null,
-        )
-        data class Imagem(
-            @Field
-            val arquivo: String? = null,
-            @Field
-            val localizacao: Localizacao? = null,
-            @Field
-            val data: LocalDate? = null,
         )
 
         data class Visita(

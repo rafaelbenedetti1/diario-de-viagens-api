@@ -29,11 +29,9 @@ class ViagemService(
             if (viagemExistente == null) {
                 viagemOpt.get().viagens.add(
                     UsuarioViagem.Viagem(
-                        titulo = request.viagem?.titulo,
-                        descricao = request.viagem?.descricao,
                         localizacao = viagemRequestToModel.mapLocalizacaoRequestToModel(request.viagem?.localizacao),
                         imagemCapa = request.viagem?.imagemCapa,
-                        imagens = viagemRequestToModel.mapImagemRequestToModel(request.viagem?.imagens),
+                        imagens = request.viagem?.imagens,
                         dataInicio = request.viagem?.dataInicio,
                         dataFim = request.viagem?.dataFim,
                         visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas)
@@ -41,11 +39,9 @@ class ViagemService(
                 )
             } else {
                 // se já existir, realiza o update nos campos alterados
-                viagemExistente.titulo = request.viagem?.titulo
-                viagemExistente.descricao = request.viagem?.descricao
                 viagemExistente.localizacao = viagemRequestToModel.mapLocalizacaoRequestToModel(request.viagem?.localizacao)
                 viagemExistente.imagemCapa = request.viagem?.imagemCapa
-                viagemExistente.imagens = viagemRequestToModel.mapImagemRequestToModel(request.viagem?.imagens)
+                viagemExistente.imagens = request.viagem?.imagens
                 viagemExistente.dataInicio = request.viagem?.dataInicio
                 viagemExistente.dataFim = request.viagem?.dataFim
                 viagemExistente.visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas)

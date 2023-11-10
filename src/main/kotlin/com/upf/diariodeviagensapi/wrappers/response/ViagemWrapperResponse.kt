@@ -10,11 +10,9 @@ data class ViagemWrapperResponse(
     val viagens: List<ViagemWrapperResponse>
 ) {
     data class ViagemWrapperResponse(
-        val titulo: String? = null,
-        val descricao: String? = null,
         val localizacao: LocalizacaoWrapperResponse? = null,
         val imagemCapa: String?,
-        val imagens: ArrayList<ImagemWrapperResponse>? = null,
+        val imagens: ArrayList<String>? = null,
         var visitas: ArrayList<VisitaWrapperResponse>? = null,
         val dataInicio: LocalDate? = null,
         val dataFim: LocalDate? = null
@@ -23,14 +21,6 @@ data class ViagemWrapperResponse(
             val cidade: String? = null,
             val estado: String? = null,
             val pais: String? = null,
-            val bairro: String? = null,
-            val rua: String? = null
-        )
-
-        data class ImagemWrapperResponse(
-            val arquivo: String? = null,
-            val localizacao: LocalizacaoWrapperResponse? = null,
-            val data: LocalDate? = null,
         )
 
         data class VisitaWrapperResponse(

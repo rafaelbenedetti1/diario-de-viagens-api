@@ -10,11 +10,9 @@ data class ViagemWrapperRequest(
 ) {
     data class ViagemWrapperRequest(
         val id: String? = null,
-        val titulo: String? = null,
-        val descricao: String? = null,
         val localizacao: LocalizacaoWrapperRequest? = null,
         val imagemCapa: String? = null,
-        val imagens: ArrayList<ImagemWrapperRequest>? = null,
+        val imagens: ArrayList<String>? = null,
         var visitas: ArrayList<VisitaWrapperRequest>? = null,
         val dataInicio: LocalDate? = null,
         val dataFim: LocalDate? = null,
@@ -26,12 +24,6 @@ data class ViagemWrapperRequest(
             val pais: String? = null,
             val bairro: String? = null,
             val rua: String? = null
-        )
-
-        data class ImagemWrapperRequest(
-            val arquivo: String? = null,
-            val localizacao: LocalizacaoWrapperRequest? = null,
-            val data: LocalDate? = null,
         )
 
         data class VisitaWrapperRequest(

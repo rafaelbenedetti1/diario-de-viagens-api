@@ -19,11 +19,10 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, UsuarioViagem> {
         if (viagemWrapperRequest != null) {
             lista.add(
                 UsuarioViagem.Viagem(
-                    titulo = viagemWrapperRequest.titulo,
-                    descricao = viagemWrapperRequest.descricao,
+
                     localizacao = mapLocalizacaoRequestToModel(viagemWrapperRequest.localizacao),
                     imagemCapa = viagemWrapperRequest.imagemCapa,
-                    imagens = mapImagemRequestToModel(viagemWrapperRequest.imagens),
+                    imagens = viagemWrapperRequest.imagens,
                     dataInicio = viagemWrapperRequest.dataInicio,
                     dataFim = viagemWrapperRequest.dataFim,
                     visitas = mapVisitasRequestToModel(viagemWrapperRequest.visitas)
@@ -43,20 +42,6 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, UsuarioViagem> {
             bairro = localizacaoRequest?.bairro,
             rua = localizacaoRequest?.rua
         )
-    }
-
-    fun mapImagemRequestToModel(imagensRequest: List<ViagemWrapperRequest.ViagemWrapperRequest.ImagemWrapperRequest>?): ArrayList<UsuarioViagem.Viagem.Imagem> {
-        val listaImagens: ArrayList<UsuarioViagem.Viagem.Imagem> = arrayListOf()
-        imagensRequest?.forEach {
-            listaImagens.add(
-                UsuarioViagem.Viagem.Imagem(
-                    arquivo = it.arquivo,
-                    localizacao = mapLocalizacaoRequestToModel(it.localizacao),
-                    data = it.data
-                )
-            )
-        }
-        return listaImagens
     }
 
     fun mapVisitasRequestToModel(visitasRequest: List<ViagemWrapperRequest.ViagemWrapperRequest.VisitaWrapperRequest>?): ArrayList<UsuarioViagem.Viagem.Visita> {

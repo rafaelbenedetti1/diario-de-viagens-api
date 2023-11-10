@@ -17,12 +17,11 @@ class ViagemModelToResponse: Mapper<UsuarioViagem, ViagemWrapperResponse> {
     fun mapViagensToResponse(viagens: ArrayList<UsuarioViagem.Viagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse> {
         val lista: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse> = arrayListOf()
         viagens?.forEach {
-                lista.add(ViagemWrapperResponse.ViagemWrapperResponse(
-                    titulo = it.titulo,
-                    descricao = it.descricao,
+                lista.add(
+                    ViagemWrapperResponse.ViagemWrapperResponse(
                     localizacao = mapLocalizacaoToResponse(it.localizacao),
                     imagemCapa = it.imagemCapa,
-                    imagens = mapImagemToResponse(it.imagens),
+                    imagens = it.imagens,
                     dataInicio = it.dataInicio,
                     dataFim = it.dataFim,
                     visitas = mapVisitasToResponse(it.visitas)
@@ -36,23 +35,7 @@ class ViagemModelToResponse: Mapper<UsuarioViagem, ViagemWrapperResponse> {
             cidade = localizacao?.cidade,
             estado = localizacao?.estado,
             pais = localizacao?.pais,
-            bairro = localizacao?.bairro,
-            rua = localizacao?.rua
         )
-    }
-
-    fun mapImagemToResponse(imagens: List<UsuarioViagem.Viagem.Imagem>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> {
-        val listaImagens: ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse> = arrayListOf()
-        imagens?.forEach {
-            listaImagens.add(
-                ViagemWrapperResponse.ViagemWrapperResponse.ImagemWrapperResponse(
-                    arquivo = it.arquivo,
-                    localizacao = mapLocalizacaoToResponse(it.localizacao),
-                    data = it.data
-                )
-            )
-        }
-        return listaImagens
     }
 
     fun mapVisitasToResponse(visitas: List<UsuarioViagem.Viagem.Visita>?): ArrayList<ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse> {
