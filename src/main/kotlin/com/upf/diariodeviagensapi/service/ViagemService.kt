@@ -23,7 +23,7 @@ class ViagemService(
 
     fun insertViagem(request: ViagemWrapperRequest): ApiResponse<ViagemWrapperResponse> {
         // consulta na base para ver se a viagem já existe baseado no viagem id
-        val viagemOpt = viagemRepository.findUsuarioViagemById(request.id)
+        val viagemOpt = viagemRepository.findUsuarioViagemsByUsuario(request.usuario)
         return if (viagemOpt.isPresent) {
             val viagemExistente = viagemOpt.get().viagens.find { it.id == request.viagem?.id }
             if (viagemExistente == null) {
@@ -34,7 +34,8 @@ class ViagemService(
                         imagens = request.viagem?.imagens,
                         dataInicio = request.viagem?.dataInicio,
                         dataFim = request.viagem?.dataFim,
-                        visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas)
+                        visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas),
+                        avaliacao = request.viagem?.avaliacao
                     )
                 )
             } else {
@@ -45,6 +46,7 @@ class ViagemService(
                 viagemExistente.dataInicio = request.viagem?.dataInicio
                 viagemExistente.dataFim = request.viagem?.dataFim
                 viagemExistente.visitas = viagemRequestToModel.mapVisitasRequestToModel(request.viagem?.visitas)
+                viagemExistente.avaliacao = request.viagem?.avaliacao
             }
             ApiResponse(
                 viagemModelToResponse.map(

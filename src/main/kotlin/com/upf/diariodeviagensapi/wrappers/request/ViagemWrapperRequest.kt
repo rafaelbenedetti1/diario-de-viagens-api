@@ -14,23 +14,20 @@ data class ViagemWrapperRequest(
         val imagemCapa: String? = null,
         val imagens: ArrayList<String>? = null,
         var visitas: ArrayList<VisitaWrapperRequest>? = null,
-        val dataInicio: LocalDate? = null,
-        val dataFim: LocalDate? = null,
-
+        val dataInicio: String? = null,
+        val dataFim: String? = null,
+        val avaliacao: Double? = null
         ) {
         data class LocalizacaoWrapperRequest(
             val cidade: String? = null,
             val estado: String? = null,
             val pais: String? = null,
-            val bairro: String? = null,
-            val rua: String? = null
         )
 
         data class VisitaWrapperRequest(
             val nomeLocal: String? = null,
-            val imagens: ArrayList<String>? = null,
-            val localizacao: LocalizacaoWrapperRequest? = null,
-            val data: LocalDate? = null,
+            val imagens: String? = null,
+            val data: String? = null,
         )
     }
 }

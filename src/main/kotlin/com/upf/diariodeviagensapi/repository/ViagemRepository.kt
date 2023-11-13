@@ -11,7 +11,7 @@ interface ViagemRepository: MongoRepository<UsuarioViagem, String> {
 
     fun findUsuarioViagemById(id: String?): Optional<UsuarioViagem>
 
-    fun findByViagensId(id: String?): Optional<UsuarioViagem>
+    fun findUsuarioViagemsByUsuario(usuario: String?): Optional<UsuarioViagem>
 
     fun findUsuarioViagemByUsuario(usuario: String): ViagemWrapperResponse
 }

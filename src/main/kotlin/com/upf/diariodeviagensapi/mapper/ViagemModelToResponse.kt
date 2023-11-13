@@ -24,7 +24,8 @@ class ViagemModelToResponse: Mapper<UsuarioViagem, ViagemWrapperResponse> {
                     imagens = it.imagens,
                     dataInicio = it.dataInicio,
                     dataFim = it.dataFim,
-                    visitas = mapVisitasToResponse(it.visitas)
+                    visitas = mapVisitasToResponse(it.visitas),
+                    avaliacao = it.avaliacao
                 ))
             }
         return lista
@@ -44,7 +45,6 @@ class ViagemModelToResponse: Mapper<UsuarioViagem, ViagemWrapperResponse> {
             listaVisitas.add(
                 ViagemWrapperResponse.ViagemWrapperResponse.VisitaWrapperResponse(
                     nomeLocal = it.nomeLocal,
-                    localizacao = mapLocalizacaoToResponse(it.localizacao),
                     data = it.data,
                     imagens = it.imagens
                 )

@@ -4,6 +4,7 @@ import com.upf.diariodeviagensapi.service.ViagemService
 import com.upf.diariodeviagensapi.wrappers.request.ViagemWrapperRequest
 import com.upf.diariodeviagensapi.wrappers.response.ApiResponse
 import com.upf.diariodeviagensapi.wrappers.response.ViagemWrapperResponse
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("api/v1/viagem")
+@CrossOrigin
 class ViagemController(private val viagemService: ViagemService) {
 
 
@@ -21,7 +23,7 @@ class ViagemController(private val viagemService: ViagemService) {
        return viagemService.findAllByUsuario(usuario)
     }
 
-    @PostMapping
+    @PostMapping("/inserir")
     fun insertViagem(@RequestBody viagemWrapperRequest: ViagemWrapperRequest): ApiResponse<ViagemWrapperResponse> {
         return viagemService.insertViagem(viagemWrapperRequest)
     }

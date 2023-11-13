@@ -19,13 +19,13 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, UsuarioViagem> {
         if (viagemWrapperRequest != null) {
             lista.add(
                 UsuarioViagem.Viagem(
-
                     localizacao = mapLocalizacaoRequestToModel(viagemWrapperRequest.localizacao),
                     imagemCapa = viagemWrapperRequest.imagemCapa,
                     imagens = viagemWrapperRequest.imagens,
                     dataInicio = viagemWrapperRequest.dataInicio,
                     dataFim = viagemWrapperRequest.dataFim,
-                    visitas = mapVisitasRequestToModel(viagemWrapperRequest.visitas)
+                    visitas = mapVisitasRequestToModel(viagemWrapperRequest.visitas),
+                    avaliacao = viagemWrapperRequest.avaliacao
                 )
             )
         }
@@ -39,8 +39,6 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, UsuarioViagem> {
             cidade = localizacaoRequest?.cidade,
             estado = localizacaoRequest?.estado,
             pais = localizacaoRequest?.pais,
-            bairro = localizacaoRequest?.bairro,
-            rua = localizacaoRequest?.rua
         )
     }
 
@@ -50,7 +48,6 @@ class ViagemRequestToModel : Mapper<ViagemWrapperRequest, UsuarioViagem> {
             listaVisitas.add(
                 UsuarioViagem.Viagem.Visita(
                     nomeLocal = it.nomeLocal,
-                    localizacao = mapLocalizacaoRequestToModel(it.localizacao),
                     data = it.data,
                     imagens = it.imagens
                 )
