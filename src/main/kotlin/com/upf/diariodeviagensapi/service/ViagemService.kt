@@ -4,6 +4,7 @@ import com.upf.diariodeviagensapi.mapper.ViagemModelToResponse
 import com.upf.diariodeviagensapi.mapper.ViagemRequestToModel
 import com.upf.diariodeviagensapi.model.UsuarioViagem
 import com.upf.diariodeviagensapi.repository.ViagemRepository
+import com.upf.diariodeviagensapi.wrappers.request.DeleteViagemWrapperRequest
 import com.upf.diariodeviagensapi.wrappers.request.ViagemWrapperRequest
 import com.upf.diariodeviagensapi.wrappers.response.ApiResponse
 import com.upf.diariodeviagensapi.wrappers.response.ViagemWrapperResponse
@@ -19,6 +20,13 @@ class ViagemService(
     fun findAllByUsuario(usuario: String): ApiResponse<ViagemWrapperResponse> {
         val retorno = viagemRepository.findUsuarioViagemByUsuario(usuario)
         return ApiResponse(data = retorno)
+    }
+
+    fun findByViagemId(usuario: String, id: String): ApiResponse<ViagemWrapperResponse.ViagemWrapperResponse> {
+        val retorno = viagemRepository.findUsuarioViagemByUsuario(usuario)
+
+        val viagem = retorno.viagens.find { it.id == id}
+        return ApiResponse(data = viagem)
     }
 
     fun insertViagem(request: ViagemWrapperRequest): ApiResponse<ViagemWrapperResponse> {
@@ -65,6 +73,21 @@ class ViagemService(
                     )
                 )
             )
+        }
+    }
+
+    fun deleteViagemById(body: DeleteViagemWrapperRequest): ApiResponse<Boolean> {
+        val usuarioViagem = viagemRepository.findUsuarioViagemsByUsuario(body.usuarioViagemId)
+
+        return if (usuarioViagem.isPresent) {
+            val viagemDeleted = usuarioViagem.get().viagens.removeIf { it.id == body.viagemId }
+            if (viagemDeleted) {
+                viagemRepository.save(usuarioViagem.get()) // Atualiza a entidade no MongoDB
+            }
+            ApiResponse(data = viagemDeleted)
+        } else {
+            ApiResponse(data = false)
+
         }
     }
 }

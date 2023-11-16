@@ -10,6 +10,7 @@ data class ViagemWrapperResponse(
     val viagens: List<ViagemWrapperResponse>
 ) {
     data class ViagemWrapperResponse(
+        val id: String,
         val localizacao: LocalizacaoWrapperResponse? = null,
         val imagemCapa: String?,
         val imagens: ArrayList<String>? = null,

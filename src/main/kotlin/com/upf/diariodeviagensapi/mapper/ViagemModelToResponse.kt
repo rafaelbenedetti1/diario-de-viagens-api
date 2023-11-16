@@ -25,7 +25,8 @@ class ViagemModelToResponse: Mapper<UsuarioViagem, ViagemWrapperResponse> {
                     dataInicio = it.dataInicio,
                     dataFim = it.dataFim,
                     visitas = mapVisitasToResponse(it.visitas),
-                    avaliacao = it.avaliacao
+                    avaliacao = it.avaliacao,
+                        id = it.id
                 ))
             }
         return lista
